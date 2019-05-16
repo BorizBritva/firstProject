@@ -9,15 +9,19 @@
 	height: 900px;
 }
 .display {
-	width: 400px;
-	height: 600px;
+	width: 399px;
+	height: 602px;
 	border: 1px solid black;
 	position: relative;
-	display: inline-block;
 }
 .controller {
 	width: 380px;
 	height: 200px;
 	border: 1px solid red;
 	position: relative;
+}
+.pixel {
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
 }

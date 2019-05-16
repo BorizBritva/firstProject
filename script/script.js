@@ -1,13 +1,18 @@
+//create main display element
 const display = document.querySelector('.display'),
-	  gamePart = document.createElement('div'),
-	  pixel = document.createElement('div');
-
-gamePart.style.cssText = "width: 80%; \ height: 100%; \ border: 1px solid black; \ position: relative;";
-pixel.style.cssText = "width: 10px; \ height: 10px; \ border: 1px solid black;";
+	  gamePart = document.createElement('div');
+//set style to matrix
+gamePart.style.cssText = "width: 80%; \ height: 100%; \ border: 1px solid black; \ position: relative; \ display: flex; \ flex-wrap: wrap;";
+//push pixel-elem to matrix
+for (let i=0; i<840; i++) {
+	let pixel = document.createElement('div');
+	pixel.classList.add('pixel');
+	gamePart.appendChild(pixel);
+};
 
 display.appendChild(gamePart);
-for (let i=0; i<10; i++) {
-	gamePart.appendChild(pixel.setAttribute('posx', i));
-}
+
+const pixel = document.querySelectorAll('.pixel');
+
 /*pixel.style.cssText = "width:"*/
 

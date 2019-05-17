@@ -1,6 +1,7 @@
 //create main display element
 const display = document.querySelector('.display'),
 	  gamePart = document.createElement('div');
+
 let x = 1,
 	y = 40;
 //set style to matrix
@@ -22,9 +23,15 @@ for (let i=0; i<840; i++) {
 
 display.appendChild(gamePart);
 
-/*const pixel = document.body.querySelectorAll('.pixel');
+const pixel = document.body.querySelectorAll('.pixel');
 
-let n = 0;
+//initial start position
+const startX = 10,
+	  startY = 20;
+
+const snake = [document.querySelector('.pixel').dataset.x = startX, document.querySelector('.pixel').dataset.x = startY ];
+console.log(snake);
+/*let n = 0;
 //индексация пикселей монитора
 for (let y=40; y>0; y--) {
 	for (let x=1; x<22; x++) {

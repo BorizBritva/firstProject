@@ -20,6 +20,14 @@
 	border: 1px solid red;
 	position: relative;
 }
+.monitor {
+	width: 80%;
+	height: 100%;
+	border: 1px solid black;
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+}
 .pixel {
 	width: 15px;
 	height: 15px;

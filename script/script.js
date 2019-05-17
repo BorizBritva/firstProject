@@ -2,7 +2,7 @@
 const display = document.querySelector('.display'),
 	  gamePart = document.createElement('div');
 //set style to matrix
-gamePart.style.cssText = "width: 80%; \ height: 100%; \ border: 1px solid black; \ position: relative; \ display: flex; \ flex-wrap: wrap;";
+gamePart.classList.add('monitor');
 //push pixel-elem to matrix
 for (let i=0; i<840; i++) {
 	let elem = document.createElement('div');
@@ -12,7 +12,7 @@ for (let i=0; i<840; i++) {
 
 display.appendChild(gamePart);
 
-const pixel = document.querySelectorAll('.pixel');
+const pixel = document.body.querySelectorAll('.pixel');
 
 let n = 0;
 //индексация пикселей монитора
@@ -40,7 +40,3 @@ const Person = {
 	moveLeft() {},
 	moveRight() {}
 };
-
-
-
-

@@ -10,7 +10,7 @@
 }
 .display {
 	width: 399px;
-	height: 602px;
+	height: 603px;
 	border: 1px solid black;
 	position: relative;
 }
@@ -23,5 +23,8 @@
 .pixel {
 	width: 15px;
 	height: 15px;
-	border: 1px solid black;
+	border: 1px solid #f0f0f0;
+}
+.player {
+	background-color: #57fab4;
 }

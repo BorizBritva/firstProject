@@ -14,5 +14,12 @@ display.appendChild(gamePart);
 
 const pixel = document.querySelectorAll('.pixel');
 
-/*pixel.style.cssText = "width:"*/
+let index = 0;
 
+for (var y=42; y>0; y--) {
+	for (var x=1; x<22; x++) {
+		pixel[index].setAttribute('posY', y);
+		pixel[index].setAttribute('posX', x);
+		index++; 
+	}
+};

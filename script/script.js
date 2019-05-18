@@ -29,7 +29,7 @@ const pixel = document.body.querySelectorAll('.pixel');
 const startX = 10,
 	  startY = 20;
 
-const snake = [
+let snake = [
 			   document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`)
@@ -37,16 +37,37 @@ const snake = [
 
 snake.forEach(item => item.classList.add('player'));
 
-function move() {
-	let newSnake = [...snake];
+function move(left, right) {
+	let newSnake = snake.map(item=> +(item.dataset.x));
 	snake.forEach(item => item.classList.remove('player'));
-	console.log(newSnake);
+	
+	if (left) {
+			snake = [
+				document.querySelector(`[data-x="${newSnake[0] - 1}"][data-y="${startY}"]`),
+				document.querySelector(`[data-x="${newSnake[1] - 1}"][data-y="${startY}"]`),
+				document.querySelector(`[data-x="${newSnake[2] - 1}"][data-y="${startY}"]`)
+				];
+			};
+
+	if (right) {
+			snake = [
+				document.querySelector(`[data-x="${newSnake[0] + 1}"][data-y="${startY}"]`),
+				document.querySelector(`[data-x="${newSnake[1] + 1}"][data-y="${startY}"]`),
+				document.querySelector(`[data-x="${newSnake[2] + 1}"][data-y="${startY}"]`)
+				];
+			};
+
+	snake.forEach(item => item.classList.add('player'));
+	console.log(newSnake[0] + 1);
 };
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {
-		return move();
-	}
+		return move(0, 1);
+	};
+	if (e.keyCode == 37) {
+		return move(1, 0);
+	};
 })
 /*let n = 0;
 //индексация пикселей монитора

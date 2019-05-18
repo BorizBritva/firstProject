@@ -37,28 +37,40 @@ let snake = [
 
 snake.forEach(item => item.classList.add('player'));
 
-function move(left, right) {
-	let newSnake = snake.map(item=> +(item.dataset.x));
+function move(left, right, up, down) {
+	let movLR = snake.map(item=> +(item.dataset.x));
+	let movUD = snake.map(item=> +(item.dataset.y));
 	snake.forEach(item => item.classList.remove('player'));
 	
 	if (left) {
 			snake = [
-				document.querySelector(`[data-x="${newSnake[0] - 1}"][data-y="${startY}"]`),
-				document.querySelector(`[data-x="${newSnake[1] - 1}"][data-y="${startY}"]`),
-				document.querySelector(`[data-x="${newSnake[2] - 1}"][data-y="${startY}"]`)
+				document.querySelector(`[data-x="${movLR[0] - 1}"][data-y="${movUD[0]}"]`),
+				document.querySelector(`[data-x="${movLR[1] - 1}"][data-y="${movUD[1]}"]`),
+				document.querySelector(`[data-x="${movLR[2] - 1}"][data-y="${movUD[2]}"]`)
 				];
 			};
-
 	if (right) {
 			snake = [
-				document.querySelector(`[data-x="${newSnake[0] + 1}"][data-y="${startY}"]`),
-				document.querySelector(`[data-x="${newSnake[1] + 1}"][data-y="${startY}"]`),
-				document.querySelector(`[data-x="${newSnake[2] + 1}"][data-y="${startY}"]`)
+				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
+				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
+				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
 				];
 			};
-
+	/*if (up) {
+			snake = [
+				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
+				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
+				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
+				];
+			};
+	if (right) {
+			snake = [
+				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
+				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
+				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
+				];
+			};*/
 	snake.forEach(item => item.classList.add('player'));
-	console.log(newSnake[0] + 1);
 };
 
 window.addEventListener('keydown', function(e) {

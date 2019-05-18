@@ -29,7 +29,7 @@ const pixel = document.body.querySelectorAll('.pixel');
 const startX = 10,
 	  startY = 20;
 
-const snake = [document.querySelector('.pixel').dataset.x = startX, document.querySelector('.pixel').dataset.x = startY ];
+const snake = [document.querySelector('`data-x=${startX} data-y=${startY}`')];
 console.log(snake);
 /*let n = 0;
 //индексация пикселей монитора

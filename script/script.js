@@ -29,8 +29,25 @@ const pixel = document.body.querySelectorAll('.pixel');
 const startX = 10,
 	  startY = 20;
 
-const snake = [document.querySelector('`data-x=${startX} data-y=${startY}`')];
-console.log(snake);
+const snake = [
+			   document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
+			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
+			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`)
+			   ];
+
+snake.forEach(item => item.classList.add('player'));
+
+function move() {
+	let newSnake = [...snake];
+	snake.forEach(item => item.classList.remove('player'));
+	console.log(newSnake);
+};
+
+window.addEventListener('keydown', function(e) {
+	if (e.keyCode == 39) {
+		return move();
+	}
+})
 /*let n = 0;
 //индексация пикселей монитора
 for (let y=40; y>0; y--) {
@@ -39,21 +56,4 @@ for (let y=40; y>0; y--) {
 		pixel[n].setAttribute('data-x',x);
 		n++;
 	};
-};
-
-//игровые объекты
-const Person = {
-	tetris: {
-		stick: [[0, 0],[0, 1],[0, -1]],
-		lightningLeft: [[0, 0], [0, 1], [-1, 0], [1, 1]],
-		lightningRight: [[0, 0], [0, 1], [-1, 1], [1, 0]],
-		tank: [[0, 0], [0, 1], [-1, 0], [1, 0]],
-		square: [] },
-	snake: [[0, 0], [-1, 0], [1, 0]],
-	tank: [[0, 0], [0, 1], [-1, 0], [1, 0]],
-	createFigure() {},
-	moveUp() {},
-	moveDown() {},
-	moveLeft() {},
-	moveRight() {}
 };*/

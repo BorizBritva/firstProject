@@ -31,30 +31,70 @@ const startX = 10,
 
 let snake = [  document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
-			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`)
+			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`),
+			   document.querySelector(`[data-x="${startX + 3}"][data-y="${startY}"]`)
 			];
 
 snake.forEach(item => item.classList.add('player'));
 
 function move(left, right ,up ,down) {
-	let pos = [+(snake[0].dataset.x), +(snake[0].dataset.y)];
-	let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
-	let newY = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
-	snake.forEach(item => item.classList.remove('player'));
+	//let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+	//let newY = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
+	//snake.forEach(item => item.classList.remove('player'));
 	
 	if (right) {
-		snake.splice(0, 1);
-		snake.push(newX);
-		snake.forEach(item => item.classList.add('player'));
+		if ((+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y)) || 
+			(+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) ) {
+			return; }
+			else {
+				snake.forEach(item => item.classList.remove('player'));
+				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+				snake.splice(0, 1);
+				snake.push(newX);
+				snake.forEach(item => item.classList.add('player'));
+			}
 	};
-	if (up) {
-		snake.splice(0, 1);
-		snake.push(newY);
-		snake.forEach(item => item.classList.add('player'));
-	}
 
-	console.log(snake);
-	console.log(newX);
+	if (left) {
+		if ((+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y)) ||
+			(+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) ) {
+			return; }
+			else {
+				snake.forEach(item => item.classList.remove('player'));
+				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) - 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+				snake.splice(0, 1);
+				snake.push(newX);
+				snake.forEach(item => item.classList.add('player'));
+			}
+	};
+
+	if (up) {
+		if ((+(snake[snake.length-1].dataset.y) < +(snake[0].dataset.y)) && (+(snake[snake.length-1].dataset.x) == +(snake[0].dataset.x))) {
+			return; }
+			else {
+				snake.forEach(item => item.classList.remove('player'));
+				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
+
+				snake.splice(0, 1);
+				snake.push(newY);
+				snake.forEach(item => item.classList.add('player'));
+			}
+	};
+
+	if (down) {
+		if ((+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) && (+(snake[snake.length-1].dataset.x) == +(snake[0].dataset.x))) {
+			return; }
+			else {
+				snake.forEach(item => item.classList.remove('player'));
+				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) - 1}"]`);
+
+				snake.splice(0, 1);
+				snake.push(newY);
+				snake.forEach(item => item.classList.add('player'));
+			}
+	};
+	//console.log(snake);
+	//console.log(newX);
 };
 
 window.addEventListener('keydown', function(e) {
@@ -66,5 +106,8 @@ window.addEventListener('keydown', function(e) {
 	};
 	if (e.keyCode == 38) {
 		return move(0, 0, 1);
+	};
+	if (e.keyCode == 40) {
+		return move(0, 0, 0, 1);
 	}
 })

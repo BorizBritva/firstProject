@@ -29,49 +29,21 @@ const pixel = document.body.querySelectorAll('.pixel');
 const startX = 10,
 	  startY = 20;
 
-let snake = [
-			   document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
+let snake = [  document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`)
-			   ];
+			];
 
 snake.forEach(item => item.classList.add('player'));
 
-function move(left, right, up, down) {
-	let movLR = snake.map(item=> +(item.dataset.x));
-	let movUD = snake.map(item=> +(item.dataset.y));
+function move(left, right ,up ,down) {
+	let pos = [+(snake[0].dataset.x), +(snake[0].dataset.y)];
 	snake.forEach(item => item.classList.remove('player'));
-	
+
 	if (left) {
-			snake = [
-				document.querySelector(`[data-x="${movLR[0] - 1}"][data-y="${movUD[0]}"]`),
-				document.querySelector(`[data-x="${movLR[1] - 1}"][data-y="${movUD[1]}"]`),
-				document.querySelector(`[data-x="${movLR[2] - 1}"][data-y="${movUD[2]}"]`)
-				];
-			};
-	if (right) {
-			snake = [
-				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
-				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
-				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
-				];
-			};
-	/*if (up) {
-			snake = [
-				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
-				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
-				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
-				];
-			};
-	if (right) {
-			snake = [
-				document.querySelector(`[data-x="${movLR[0] + 1}"][data-y="${movUD[0]}"]`),
-				document.querySelector(`[data-x="${movLR[1] + 1}"][data-y="${movUD[1]}"]`),
-				document.querySelector(`[data-x="${movLR[2] + 1}"][data-y="${movUD[2]}"]`)
-				];
-			};*/
-	snake.forEach(item => item.classList.add('player'));
-};
+
+	};
+}
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {
@@ -80,13 +52,7 @@ window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 37) {
 		return move(1, 0);
 	};
+	if (e.keyCode == 38) {
+		return move(0, 0, 1);
+	}
 })
-/*let n = 0;
-//индексация пикселей монитора
-for (let y=40; y>0; y--) {
-	for (let x=1; x<22; x++) {
-		pixel[n].setAttribute('data-y',y);
-		pixel[n].setAttribute('data-x',x);
-		n++;
-	};
-};*/

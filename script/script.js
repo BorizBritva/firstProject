@@ -38,12 +38,24 @@ snake.forEach(item => item.classList.add('player'));
 
 function move(left, right ,up ,down) {
 	let pos = [+(snake[0].dataset.x), +(snake[0].dataset.y)];
+	let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+	let newY = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
 	snake.forEach(item => item.classList.remove('player'));
-
-	if (left) {
-
+	
+	if (right) {
+		snake.splice(0, 1);
+		snake.push(newX);
+		snake.forEach(item => item.classList.add('player'));
 	};
-}
+	if (up) {
+		snake.splice(0, 1);
+		snake.push(newY);
+		snake.forEach(item => item.classList.add('player'));
+	}
+
+	console.log(snake);
+	console.log(newX);
+};
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {

@@ -4,6 +4,10 @@ const display = document.querySelector('.display'),
 
 let x = 1,
 	y = 40;
+//генератор целевой точки
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
 //set style to matrix
 gamePart.classList.add('monitor');
 //push pixel-elem to matrix
@@ -32,23 +36,28 @@ const startX = 10,
 let snake = [  document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`),
-			   document.querySelector(`[data-x="${startX + 3}"][data-y="${startY}"]`)
+			   document.querySelector(`[data-x="${startX + 3}"][data-y="${startY}"]`),
+			   document.querySelector(`[data-x="${startX + 4}"][data-y="${startY}"]`)
 			];
 
 snake.forEach(item => item.classList.add('player'));
 
+let randX = getRandomInt(1, 22);
+let randY = getRandomInt(1, 41);
+let target = document.querySelector(`[data-x="${randX}"][data-y="${randY}"]`);
+target.classList.add('target');
+
 function move(left, right ,up ,down) {
-	//let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
-	//let newY = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
-	//snake.forEach(item => item.classList.remove('player'));
 	
 	if (right) {
-		if ((+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y)) || 
-			(+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) ) {
+		if ((+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));
 				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+				if (newX == target) {
+					snake.unshift(target);
+				}
 				snake.splice(0, 1);
 				snake.push(newX);
 				snake.forEach(item => item.classList.add('player'));
@@ -56,8 +65,7 @@ function move(left, right ,up ,down) {
 	};
 
 	if (left) {
-		if ((+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y)) ||
-			(+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) ) {
+		if ((+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));
@@ -74,7 +82,6 @@ function move(left, right ,up ,down) {
 			else {
 				snake.forEach(item => item.classList.remove('player'));
 				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
-
 				snake.splice(0, 1);
 				snake.push(newY);
 				snake.forEach(item => item.classList.add('player'));
@@ -93,8 +100,6 @@ function move(left, right ,up ,down) {
 				snake.forEach(item => item.classList.add('player'));
 			}
 	};
-	//console.log(snake);
-	//console.log(newX);
 };
 
 window.addEventListener('keydown', function(e) {

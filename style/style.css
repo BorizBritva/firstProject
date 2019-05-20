@@ -13,6 +13,9 @@
 	height: 603px;
 	border: 1px solid black;
 	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 .controller {
 	width: 380px;
@@ -27,6 +30,12 @@
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
+}
+.point {
+	width: 19%;
+	height: 50px;
+	text-align: center;
+	padding-top: 20px;
 }
 .pixel {
 	width: 15px;

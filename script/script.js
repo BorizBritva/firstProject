@@ -1,12 +1,16 @@
 //create main display element
 const display = document.querySelector('.display'),		//initial game_zone
 	  gamePart = document.createElement('div'),		//initial matrix
-	  startX = 10,	//initial start position
-	  startY = 20;	//initial start position
+	  pointValue = document.createElement('div'),
+	  startX = 10,		//initial start position
+	  startY = 20;		//initial start position
 
 //point-generator
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+};
+function point() {
+	this.innerHTML= (+this.innerHTML) + 10;
 };
 
 let x = 1,
@@ -18,6 +22,8 @@ let x = 1,
 
 //add style to matrix
 gamePart.classList.add('monitor');
+pointValue.innerHTML=0;
+pointValue.classList.add('point');
 //push pixel to matrix
 for (let i=0; i<840; i++) {
 	let elem = document.createElement('div');
@@ -34,6 +40,7 @@ for (let i=0; i<840; i++) {
 };
 
 display.appendChild(gamePart);
+display.appendChild(pointValue);
 
 const pixel = document.body.querySelectorAll('.pixel');
 
@@ -66,12 +73,14 @@ function move(left, right ,up ,down) {
 				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
 				if (newX.classList.contains('target')) {
 					snake.unshift(target);
+					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
 					console.log(snake);
 				}
 				snake.splice(0, 1);
 				snake.push(newX);
 				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
+
 			}
 	};
 
@@ -83,6 +92,7 @@ function move(left, right ,up ,down) {
 				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) - 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
 				if (newX.classList.contains('target')) {
 					snake.unshift(target);
+					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
 					console.log(snake);
 				}				
@@ -100,6 +110,7 @@ function move(left, right ,up ,down) {
 				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
 				if (newY.classList.contains('target')) {
 					snake.unshift(target);
+					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
 					console.log(snake);
 				}				
@@ -117,6 +128,7 @@ function move(left, right ,up ,down) {
 				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) - 1}"]`);
 				if (newY.classList.contains('target')) {
 					snake.unshift(target);
+					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
 					console.log(snake);
 				}

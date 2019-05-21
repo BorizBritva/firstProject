@@ -10,7 +10,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 function point() {
-	this.innerHTML= (+this.innerHTML) + 10;
+	this.innerHTML= (+this.innerHTML) + 7;
 };
 
 let x = 1,
@@ -66,7 +66,7 @@ targ();
 function move(left, right ,up ,down) {
 	
 	if (right) {
-		if ((+(snake[snake.length-1].dataset.x) < +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y))) {
+		if ((+(snake[snake.length-1].dataset.x) < +(snake[snake.length-2].dataset.x))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));
@@ -85,7 +85,7 @@ function move(left, right ,up ,down) {
 	};
 
 	if (left) {
-		if ((+(snake[snake.length-1].dataset.x) > +(snake[0].dataset.x)) && (+(snake[snake.length-1].dataset.y) == +(snake[0].dataset.y))) {
+		if ((+(snake[snake.length-1].dataset.x) > +(snake[snake.length-2].dataset.x))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));
@@ -103,7 +103,7 @@ function move(left, right ,up ,down) {
 	};
 
 	if (up) {
-		if ((+(snake[snake.length-1].dataset.y) < +(snake[0].dataset.y)) && (+(snake[snake.length-1].dataset.x) == +(snake[0].dataset.x))) {
+		if ((+(snake[snake.length-1].dataset.y) < +(snake[snake.length-2].dataset.y))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));
@@ -121,7 +121,7 @@ function move(left, right ,up ,down) {
 	};
 
 	if (down) {
-		if ((+(snake[snake.length-1].dataset.y) > +(snake[0].dataset.y)) && (+(snake[snake.length-1].dataset.x) == +(snake[0].dataset.x))) {
+		if ((+(snake[snake.length-1].dataset.y) > +(snake[snake.length-2].dataset.y))) {
 			return; }
 			else {
 				snake.forEach(item => item.classList.remove('player'));

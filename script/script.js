@@ -9,6 +9,7 @@ const display = document.querySelector('.display'),		//initial game_zone
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
+
 function point() {
 	this.innerHTML= (+this.innerHTML) + 7;
 };
@@ -54,8 +55,8 @@ snake.forEach(item => item.classList.add('player'));
 
 function targ() {
 
-	randX = getRandomInt(1, 22);
-	randY = getRandomInt(1, 41);
+	randX = getRandomInt(1, 21);
+	randY = getRandomInt(1, 40);
 
 	target = document.querySelector(`[data-x="${randX}"][data-y="${randY}"]`);
 	target.classList.add('target');
@@ -63,7 +64,7 @@ function targ() {
 
 targ();
 
-function move(left, right ,up ,down) {
+/*function move(left, right ,up ,down) {
 	
 	if (right) {
 		if ((+(snake[snake.length-1].dataset.x) < +(snake[snake.length-2].dataset.x))) {
@@ -75,7 +76,6 @@ function move(left, right ,up ,down) {
 					snake.unshift(target);
 					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
-					console.log(snake);
 				}
 				snake.splice(0, 1);
 				snake.push(newX);
@@ -94,7 +94,6 @@ function move(left, right ,up ,down) {
 					snake.unshift(target);
 					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
-					console.log(snake);
 				}				
 				snake.splice(0, 1);
 				snake.push(newX);
@@ -112,11 +111,11 @@ function move(left, right ,up ,down) {
 					snake.unshift(target);
 					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
-					console.log(snake);
 				}				
 				snake.splice(0, 1);
 				snake.push(newY);
 				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
+
 			}
 	};
 
@@ -130,7 +129,6 @@ function move(left, right ,up ,down) {
 					snake.unshift(target);
 					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
-					console.log(snake);
 				}
 				snake.splice(0, 1);
 				snake.push(newY);
@@ -138,8 +136,90 @@ function move(left, right ,up ,down) {
 			}
 	};
 
+console.log(target);
+};*/
 
-};
+function move(l, r, u, d) {
+
+	let newX = +snake[snake.length - 1].dataset.x;
+	let newY = +snake[snake.length - 1].dataset.y;
+
+	let newElem = {
+		x: {
+			right: document.querySelector(`[data-x="${newX + 1}"][data-y="${newY}"]`),
+			left: document.querySelector(`[data-x="${newX - 1}"][data-y="${newY}"]`)
+		},
+		y: {
+			up: document.querySelector(`[data-x="${newX}"][data-y="${newY + 1}"]`),
+			down: document.querySelector(`[data-x="${newX}"][data-y="${newY - 1}"]`)
+		},
+		check() {
+
+		}
+	};
+
+	let  {x: {right, left}, y: {up, down}} = newElem;
+
+	snake.forEach(item => item.classList.remove('player'));
+	snake.splice(0, 1);
+
+	if (l) {
+		if (left.classList.contains('target')) {
+			snake.unshift(target);
+			point.call(pointValue);
+			setTimeout(function() {return targ()}, 1000);
+		};
+		snake.push(left);
+	};
+	if (u) {
+		if (up.classList.contains('target')) {
+			snake.unshift(target);
+			point.call(pointValue);
+			setTimeout(function() {return targ()}, 1000);
+		};
+		snake.push(up);
+	};
+	if (d) {
+		if (down.classList.contains('target')) {
+			snake.unshift(target);
+			point.call(pointValue);
+			setTimeout(function() {return targ()}, 1000);
+		};
+		snake.push(down);
+	};
+	if (r){
+		if (right.classList.contains('target')) {
+			snake.unshift(target);
+			point.call(pointValue);
+			setTimeout(function() {return targ()}, 1000);
+		};
+		snake.push(right);
+	};
+
+	snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
+	/*if (right) {
+		if ((+(snake[snake.length-1].dataset.x) < +(snake[snake.length-2].dataset.x))) {
+			return; }
+			else {
+				snake.forEach(item => item.classList.remove('player'));
+				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
+				if (newX.classList.contains('target')) {
+					snake.unshift(target);
+					point.call(pointValue);
+					setTimeout(function() {return targ()}, 1000);
+				}
+				snake.splice(0, 1);
+				snake.push(newX);
+				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
+
+			}
+	};*/
+
+
+
+	console.log(right);
+
+}
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {

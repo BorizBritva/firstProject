@@ -40,7 +40,7 @@
 .pixel {
 	width: 15px;
 	height: 15px;
-	/*border: 1px solid #f0f0f0;*/
+	border: 1px solid #f0f0f0;
 }
 .player {
 	background-color: #57fab4;

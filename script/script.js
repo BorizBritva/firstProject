@@ -1,7 +1,7 @@
 //create main display element
 const display = document.querySelector('.display'),		//initial game_zone
 	  gamePart = document.createElement('div'),		//initial matrix
-	  pointValue = document.createElement('div'),
+	  pointValue = document.createElement('div'),  	//point window
 	  startX = 10,		//initial start position
 	  startY = 20;		//initial start position
 
@@ -9,7 +9,7 @@ const display = document.querySelector('.display'),		//initial game_zone
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
-
+//point counter
 function point() {
 	this.innerHTML= (+this.innerHTML) + 7;
 };
@@ -62,83 +62,6 @@ function targ() {
 	target.classList.add('target');
 };
 
-targ();
-
-/*function move(left, right ,up ,down) {
-	
-	if (right) {
-		if ((+(snake[snake.length-1].dataset.x) < +(snake[snake.length-2].dataset.x))) {
-			return; }
-			else {
-				snake.forEach(item => item.classList.remove('player'));
-				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
-				if (newX.classList.contains('target')) {
-					snake.unshift(target);
-					point.call(pointValue);
-					setTimeout(function() {return targ()}, 1000);
-				}
-				snake.splice(0, 1);
-				snake.push(newX);
-				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-
-			}
-	};
-
-	if (left) {
-		if ((+(snake[snake.length-1].dataset.x) > +(snake[snake.length-2].dataset.x))) {
-			return; }
-			else {
-				snake.forEach(item => item.classList.remove('player'));
-				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) - 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
-				if (newX.classList.contains('target')) {
-					snake.unshift(target);
-					point.call(pointValue);
-					setTimeout(function() {return targ()}, 1000);
-				}				
-				snake.splice(0, 1);
-				snake.push(newX);
-				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-			}
-	};
-
-	if (up) {
-		if ((+(snake[snake.length-1].dataset.y) < +(snake[snake.length-2].dataset.y))) {
-			return; }
-			else {
-				snake.forEach(item => item.classList.remove('player'));
-				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) + 1}"]`);
-				if (newY.classList.contains('target')) {
-					snake.unshift(target);
-					point.call(pointValue);
-					setTimeout(function() {return targ()}, 1000);
-				}				
-				snake.splice(0, 1);
-				snake.push(newY);
-				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-
-			}
-	};
-
-	if (down) {
-		if ((+(snake[snake.length-1].dataset.y) > +(snake[snake.length-2].dataset.y))) {
-			return; }
-			else {
-				snake.forEach(item => item.classList.remove('player'));
-				let newY = document.querySelector(`[data-x="${+(snake[snake.length - 1].dataset.x)}"][data-y="${+(snake[snake.length-1].dataset.y) - 1}"]`);
-				if (newY.classList.contains('target')) {
-					snake.unshift(target);
-					point.call(pointValue);
-					setTimeout(function() {return targ()}, 1000);
-				}
-				snake.splice(0, 1);
-				snake.push(newY);
-				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-			}
-	};
-
-console.log(target);
-};*/
-
 function move(l, r, u, d) {
 
 	let newX = +snake[snake.length - 1].dataset.x;
@@ -153,73 +76,41 @@ function move(l, r, u, d) {
 			up: document.querySelector(`[data-x="${newX}"][data-y="${newY + 1}"]`),
 			down: document.querySelector(`[data-x="${newX}"][data-y="${newY - 1}"]`)
 		},
-		check() {
-
+		check(elem) {
+			if (elem.classList.contains('target')) {
+					snake.unshift(target);
+					point.call(pointValue);
+					setTimeout(function() {return targ()}, 1000);
+			};
 		}
 	};
 
-	let  {x: {right, left}, y: {up, down}} = newElem;
+	let  {x: {right, left}, y: {up, down}, check} = newElem;
 
 	snake.forEach(item => item.classList.remove('player'));
 	snake.splice(0, 1);
 
 	if (l) {
-		if (left.classList.contains('target')) {
-			snake.unshift(target);
-			point.call(pointValue);
-			setTimeout(function() {return targ()}, 1000);
-		};
+		check(left)
 		snake.push(left);
 	};
 	if (u) {
-		if (up.classList.contains('target')) {
-			snake.unshift(target);
-			point.call(pointValue);
-			setTimeout(function() {return targ()}, 1000);
-		};
+		check(up);
 		snake.push(up);
 	};
 	if (d) {
-		if (down.classList.contains('target')) {
-			snake.unshift(target);
-			point.call(pointValue);
-			setTimeout(function() {return targ()}, 1000);
-		};
+		check(down);
 		snake.push(down);
 	};
 	if (r){
-		if (right.classList.contains('target')) {
-			snake.unshift(target);
-			point.call(pointValue);
-			setTimeout(function() {return targ()}, 1000);
-		};
+		check(right);
 		snake.push(right);
 	};
 
 	snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-	/*if (right) {
-		if ((+(snake[snake.length-1].dataset.x) < +(snake[snake.length-2].dataset.x))) {
-			return; }
-			else {
-				snake.forEach(item => item.classList.remove('player'));
-				let newX = document.querySelector(`[data-x="${+(snake[snake.length-1].dataset.x) + 1}"][data-y="${+(snake[snake.length-1].dataset.y)}"]`);
-				if (newX.classList.contains('target')) {
-					snake.unshift(target);
-					point.call(pointValue);
-					setTimeout(function() {return targ()}, 1000);
-				}
-				snake.splice(0, 1);
-				snake.push(newX);
-				snake.forEach((item) => { item.classList.remove('target'); item.classList.add('player')});
-
-			}
-	};*/
-
-
-
-	console.log(right);
-
 }
+
+targ();
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {
@@ -243,5 +134,3 @@ window.addEventListener('keydown', function(e) {
 			return move(0, 0, 0, 1); }, 100);
 	}
 });
-
-/*setInterval(function() { return move(0, 1, 0, 0)}, 1000);*/

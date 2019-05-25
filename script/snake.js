@@ -71,4 +71,26 @@
 	};
 
 console.log(target);
+window.addEventListener('keydown', function(e) {
+	if (e.keyCode == 39) {
+		clearTimeout(timerID);
+		timerID = setInterval(function() {
+			return move(0, 1, 0, 0); }, 100);
+	};
+	if (e.keyCode == 37) {
+		clearTimeout(timerID);
+		timerID = setInterval(function() {
+			return move(1, 0, 0, 0); }, 100);
+	};
+	if (e.keyCode == 38) {
+		clearTimeout(timerID);
+		timerID = setInterval(function() {
+			return move(0, 0, 1, 0); }, 100);
+	};
+	if (e.keyCode == 40) {
+		clearTimeout(timerID);
+		timerID = setInterval(function() {
+			return move(0, 0, 0, 1); }, 100);
+	}
+});
 };*/

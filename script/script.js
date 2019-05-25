@@ -77,30 +77,37 @@ function move(l, r, u, d) {
 			down: document.querySelector(`[data-x="${newX}"][data-y="${newY - 1}"]`)
 		},
 		check(elem) {
+			if (elem.classList.contains('player')) {
+				clearTimeout(timerID);
+				alert('Game Over');
+			}
 			if (elem.classList.contains('target')) {
-					snake.unshift(target);
+					snake.unshift(elem);
 					point.call(pointValue);
 					setTimeout(function() {return targ()}, 1000);
 			};
-		}
+		},
 	};
 
 	let  {x: {right, left}, y: {up, down}, check} = newElem;
 
-	snake.forEach(item => item.classList.remove('player'));
+	snake[0].classList.remove('player');
 	snake.splice(0, 1);
 
 	if (l) {
 		check(left)
 		snake.push(left);
+		//console.log(left);
 	};
 	if (u) {
 		check(up);
 		snake.push(up);
+		//console.log(up);
 	};
 	if (d) {
 		check(down);
 		snake.push(down);
+		//console.log(down);
 	};
 	if (r){
 		check(right);
@@ -111,6 +118,13 @@ function move(l, r, u, d) {
 }
 
 targ();
+
+function start() {
+		timerID = setInterval(function() {
+			return move(0, 1, 0, 0); }, 100);
+};
+
+//start();
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {

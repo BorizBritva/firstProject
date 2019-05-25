@@ -1,3 +1,6 @@
+.container {
+	margin: auto;
+}
 .main {
 	position: relative;
 	display: flex;

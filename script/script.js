@@ -14,7 +14,8 @@ function point() {
 	this.innerHTML= (+this.innerHTML) + 7;
 };
 
-let x = 1,
+let snake=[],
+	x = 1,
 	y = 40,
 	randX,
 	randY,
@@ -45,13 +46,21 @@ display.appendChild(pointValue);
 
 const pixel = document.body.querySelectorAll('.pixel');
 
-let snake = [  document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
+function createSnake() {
+	/*if (snake.length > 0) {
+		snake.forEach(item => item.classList.remove('player'));
+	};*/
+	console.log(snake);
+
+    snake = [  document.querySelector(`[data-x="${startX}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 1}"][data-y="${startY}"]`),
 			   document.querySelector(`[data-x="${startX + 2}"][data-y="${startY}"]`)
 			];
+	//add style to snake
+	snake.forEach(item => item.classList.add('player'));
+};
 
-//add style to snake
-snake.forEach(item => item.classList.add('player'));
+createSnake();
 
 function targ() {
 
@@ -76,10 +85,12 @@ function move(l, r, u, d) {
 			up: document.querySelector(`[data-x="${newX}"][data-y="${newY + 1}"]`),
 			down: document.querySelector(`[data-x="${newX}"][data-y="${newY - 1}"]`)
 		},
+		
 		check(elem) {
 			if (elem.classList.contains('player')) {
 				clearTimeout(timerID);
 				alert('Game Over');
+				createSnake();
 			}
 			if (elem.classList.contains('target')) {
 					snake.unshift(elem);
@@ -124,7 +135,7 @@ function start() {
 			return move(0, 1, 0, 0); }, 100);
 };
 
-//start();
+start();
 
 window.addEventListener('keydown', function(e) {
 	if (e.keyCode == 39) {
